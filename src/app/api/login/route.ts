@@ -14,13 +14,13 @@ export async function POST(request: Request) {
   });
 
   if (!user) {
-    redirect("/login");
+    redirect("/login?error=Account%20not%20found.%20Create%20an%20account%20first.");
   }
 
   const validPassword = await bcrypt.compare(password, user.password);
 
   if (!validPassword) {
-    redirect("/login");
+    redirect("/login?error=Incorrect%20password.%20Please%20try%20again.");
   }
 
   const token = signToken({
